@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import "../List.css";
+import PropsTypes from "prop-types";
 
 export default class List extends Component {
+  static propTypes = {
+    contacts: PropsTypes.array.isRequired,
+  };
   render() {
     return (
       <div className="listCompField">
@@ -11,18 +15,14 @@ export default class List extends Component {
           placeholder="Filter by name or phone..."
         ></input>
         <ul>
-          <li>
-            <span className={"name"}>Name 1</span>
-            <span className={"phone"}>Phone 1</span>
-          </li>
-          <li>
-            <span className={"name"}>Name 2</span>
-            <span className={"phone"}>Phone 2</span>
-          </li>
-          <li>
-            <span className={"name"}>Name 3</span>
-            <span className={"phone"}>Phone 3</span>
-          </li>
+          {this.props.contacts.map((item, index) => {
+            return (
+              <li key={index}>
+                <span className={"name"}>{item.name}</span>
+                <span className={"phone"}>{item.phone}</span>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );
